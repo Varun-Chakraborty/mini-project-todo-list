@@ -1,0 +1,207 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: transform .5s;
+}
+
+#overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    height: 100svh;
+    width: 100svw;
+    background: #00000077;
+    display: none;
+}
+
+input:focus{
+    outline: none;
+}
+
+body {
+    background: #000;
+}
+
+header {
+    background: rgb(255, 213, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    
+    .more {
+        position: absolute;
+        left: 0;
+        padding: 1rem;
+        cursor: pointer;
+        cursor: pointer;
+        z-index: 999;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    >h2 {
+        padding: 1rem;
+        text-transform: uppercase;
+    }
+
+    >nav{
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100svh;
+        background: rgb(255, 213, 0);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: all .4s;
+        >ul{
+            padding: 1rem;
+            margin-top: 50px;
+            list-style: none;
+            >li{
+                padding: .5rem;
+                position: relative;
+                border-bottom: 1px solid gray;
+                cursor: pointer;
+            }
+            >li::before{
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                height: 2px;
+                width: 100%;
+                background: #000;
+                transform: scaleX(0);
+                transition: all .4s;
+            }
+            >li:hover::before{
+                transform: scaleX(1);
+            }
+        }
+    }
+}
+
+main {
+    margin: 1rem;
+    background: #fff;
+    border-radius: 10px;
+    min-height: 80vh;
+    padding: 0.2rem 1rem;
+    transition: all .4s;
+
+    >.task-outer {
+        border-bottom: 1px solid gray;
+        padding: .5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        >.tasks {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            
+            >input[type="text"] {
+                width: 30vw;
+                padding: .2rem 1rem;
+                border-radius: 10px;
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 1rem;
+            }
+        }
+
+        >.options {
+            display: flex;
+
+            >.material-symbols-outlined {
+                color: gray;
+                opacity: 0;
+                cursor: pointer;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+
+            >.delete:hover {
+                color: red;
+            }
+
+            >.edit:hover {
+                color: blue;
+            }
+
+            >.save {
+                display: none;
+            }
+
+            >.save:hover {
+                color: blue;
+            }
+        }
+
+    }
+
+    >.task-outer:hover>.options {
+
+        >.material-symbols-outlined {
+            opacity: 1;
+        }
+    }
+}
+
+.newTask {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 50%;
+    background: rgb(255, 213, 0);
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.newTask:hover {
+    background: rgb(220, 183, 1);
+}
+
+.newTask-form {
+    padding: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    gap: 5px;
+    border: 1px solid;
+    box-shadow: 5px 5px 10px gray;
+    transform: scale(0);
+    >h3{
+        border-radius: 10px;
+        background: rgb(255, 213, 0);
+        padding: .5rem 1rem;
+    }
+    >input[type="text"], >input[type="submit"]{
+        padding: 5px 10px;
+        border-radius: 10px;
+        border: 1px solid gray;
+    }
+    >input[type="submit"]{
+        background: rgb(255, 213, 0);
+        box-shadow: 2px 2px 5px gray;
+        cursor: pointer;
+    }
+    >input[type="submit"]:hover{
+        box-shadow: 2px 2px 2px gray;
+    }
+}
