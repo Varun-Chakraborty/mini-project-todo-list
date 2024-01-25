@@ -117,6 +117,8 @@ function assignListeners() {
     document.querySelectorAll('.task-outer').forEach(e => {
         e.addEventListener('click', evnt => {
             let classes = Array.from(evnt.target.classList);
+
+            //if clicked on pencil icon to edit
             if (classes.indexOf('edit')>=0) {
                 evnt.target.style.display = 'none';
                 evnt.target.parentElement.querySelector('.save').style.display = 'block';
@@ -129,14 +131,20 @@ function assignListeners() {
                         save();
                     }
                 });
+
+                //if clicked on tick icon after edited
             } else if (classes.indexOf('save')>=0) {
                 evnt.target.style.display = '';
                 evnt.target.parentElement.querySelector('.edit').style.display = '';
                 saveTask(evnt.target.parentElement.parentElement);
                 save();
+
+                //if clicked on delete btn
             } else if (classes.indexOf('delete')>=0) {
                 deleteTask(evnt.target.parentElement.parentElement);
                 save();
+
+                //if clicked on check box
             } else if (classes.indexOf('checkbox')>=0) {
                 if (evnt.target.checked) {
                     taskDone(evnt.target.parentElement.parentElement);
@@ -148,6 +156,7 @@ function assignListeners() {
         });
     });
 
+    // if clicked on plus icon in the bottom right to create new task 
     document.querySelector('.newTask').addEventListener('click', evnt => {
         document.querySelector('.newTask-form').style.transform = 'scale(1)';
         document.querySelector('input[type="text"]#newTask').focus();
@@ -156,6 +165,7 @@ function assignListeners() {
         document.getElementById('overlay').style.display = 'block';
     });
 
+    //if clicked on submit btn in new task form
     document.querySelector('.newTask-form-submit').addEventListener('click', evnt => {
         let task = evnt.target.previousElementSibling.value;
         newTaskFormSubmit(task);
@@ -166,7 +176,7 @@ function assignListeners() {
         document.querySelector('.newTask').style.zIndex = '';
         document.getElementById('overlay').style.display = '';
     });
-
+    //this one listens to 'enter' key if pressed while focused on input field in new task form
     document.querySelector('input[type="text"]#newTask').addEventListener('keydown', evnt => {
         if (evnt.key == 'Enter') {
             newTaskFormSubmit(evnt.target.value);
@@ -178,11 +188,14 @@ function assignListeners() {
             document.getElementById('overlay').style.display = '';
         }
     });
+
+    // delete all option in the menu
     document.querySelector('header>nav>ul>.delete-all').addEventListener('click', () => {
         deleteAll();
         menuClose();
     })
     
+    //to open the menu
     document.querySelector('header>.more').addEventListener('click', evnt => {
         if (evnt.target.getAttribute('id') === 'open') {
             menuClose();
